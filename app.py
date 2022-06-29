@@ -18,7 +18,8 @@ login_manager.init_app(app)
 login_manager.login_message = "Veuiller vous connecter pour acceder aux autres pages"
 
 
-# ############ FONCTION ##########################
+# ####################################### FONCTION ##############################################
+#################################################################################################
 def add(tx, name,prenom,telephone,email,adresse,profession,age,sexe,id):
     tx.run("create (a:Friends {name: $name,prenom: $prenom,telephone: $telephone,email: $email,adresse:$adresse,profession :$profession,age: $age,sexe: $sexe,id:$id}) return a",name=name,prenom=prenom,telephone=telephone,email=email,adresse=adresse,profession=profession,age=age,sexe=sexe,id=id)
 
@@ -38,27 +39,48 @@ def print_friends(tx, name):
 
 
 
+# ########################################### CREATION API ##############################################
+##########################################################################################################
+@app.route('/update/<id>')
+def update(id):
+    try:
+        with driver.session() as Session:
+            Session.write_transaction(update,id)
+            flash("Modifié avec succés")
+    except Exception as e:
+        print(e)
+    return redirect(url_for('admin'))
 
-@app.route('/supprimer/<string:name>')
-def sup(name):
-    r = Session.run(f"match (n:Person{name:{name}})"
-        "delete n.name = {name}",name=name)
-    print('gggggggggggggggggggggggg',r)
-    flash("Suppression reussi ..............")
-    return render_template('admin.html')
+# RECHERCHE TOUS LES NOEUDS
+@app.route("/api/listes",methods=["GET","POST"])
+def all_node():
+    query="""
+        match (n:Friends) return n
+    """
+    results = Session.run(query)
+    data= results.data()
+    return(jsonify(data))
 
-def incr_id(int:id):
-    id =0
-    id = id+1
+# RECHERCHE PAR PRENOM
+@app.route("/api/listes/<string:prenom>",methods=["GET","POST"])
+def trouve_node(prenom):
+    query="""
+        match (n:Friends {prenom:$prenom}) return n
+    """
+    results = session.run(query,prenom=prenom)
+    data= results.data()
+    return(jsonify(data))
 
-
+# SUPPRESSION D'UN USER
 @app.route('/delete/<string:name>')
 def delete(name):
     with driver.session() as Session:
         Session.write_transaction(deleted,name)    
     return redirect(url_for('creer_un_noeud'))
 
-# /<string:name>&<int:id>
+
+############################################## INSERTION UTILISATEURS ###################################
+#########################################################################################################
 @app.route("/create",methods=["GET","POST"])
 def creer_un_noeud():
     if request.method == "POST":
@@ -82,41 +104,10 @@ def creer_un_noeud():
 
 
 
-@app.route('/update/<id>')
-def update(id):
-    try:
-        with driver.session() as Session:
-            Session.write_transaction(update,id)
-            flash("Modifié avec succés")
-    except Exception as e:
-        print(e)
-    return redirect(url_for('admin'))
 
-############### RECHERCHE TOUS LES NOEUDS ##################
-@app.route("/api/listes",methods=["GET","POST"])
-# @login_required
-def all_node():
-    query="""
-        match (n:Friends) return n
-    """
-    results = Session.run(query)
-    data= results.data()
-    # print(data)
-    return(jsonify(data))
-
-# ############## RECHERCHE PAR PRENOM ######################
-@app.route("/api/listes/<string:prenom>",methods=["GET","POST"])
-# @login_required
-def trouve_node(prenom):
-    query="""
-        match (n:Friends {prenom:$prenom}) return n
-    """
-    results = session.run(query,prenom=prenom)
-    data= results.data()
-    return(jsonify(data))
-# ###############################################
+# ################################################################################################
 #           LA PAGE D'ACCUEIL
-#################################################
+##################################################################################################
 # @app.route('/')
 # def home():
 #     counting_page = count()
@@ -124,9 +115,9 @@ def trouve_node(prenom):
 #     return 'Bonjour {}.\n'.format(counting_page)
 
 
-# ###############################################
+# ################################################################################################
 #           LA PAGE DE CONNEXION
-#################################################
+##################################################################################################
 @app.route('/',methods=["POST","GET"])
 @login_manager.user_loader
 def login():
@@ -149,19 +140,17 @@ def login():
             email = data[d]['n'].get('email')
             name = data[d]['n'].get('name')
             id = data[d]['n'].get('id')
-            # login_user(id)
             emailList.append(email)
             userList.append(name)
-        # print(emailList)
         if name in userList and email in emailList:
             return redirect(url_for('admin',name=current_user))
         else:
             flash('Les données sont rentrées sont incorrects')
     return render_template('connexion.html',current_user = current_user)
 
-# ###############################################
-#           LA PAGE DE L'ADMIN
-#################################################
+# ###################################################################################################
+#                                           LA PAGE DE L'ADMIN
+#####################################################################################################
 @app.route('/admin')
 def admin():
     query="""
@@ -171,7 +160,6 @@ def admin():
     data= results.data()
     liste ={}
     dico =[]
-    # Admin = request.form['admin']
     for d in range(len(data)):
         
         liste.update({'name' : data[d].get('n').get('name'),
@@ -183,30 +171,34 @@ def admin():
             'age' : data[d].get('n').get('age'),
             'sexe' : data[d].get('n').get('sexe')})
         dico.append(liste)
-    # print(dico[1]['name'])
 
     if 'name' in session:
         name = session['name']
     return render_template('admin.html',data=data,countData=len(data),dico=dico,countFriends=len(dico),current_user = name)
 
-# ###############################################
-#           LA PAGE DES USERS
-#################################################
+# ###################################################################################################
+#                                                 LA PAGE DES USERS
+#####################################################################################################
 @app.route('/user')
 # @login_required
 def user():
     # login_user(user)
     return render_template('user.html',user=current_user)
 
-# ###############################################
-#                   LOGOUT
-#################################################
+# ###################################################################################################
+#                                                     LOGOUT
+######################################################################################################
 @app.route('/logout')
 # @login_required
 def logout():
     # logout_user()
     session.pop('name', None)
     return redirect(url_for('login'))
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
