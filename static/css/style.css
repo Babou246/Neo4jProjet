@@ -8,7 +8,7 @@ body{
     justify-content: center;
     align-items: center;
     margin-top: 59px;
-    background-color: rgb(226, 226, 220);
+    background-color: rgb(146, 146, 142);
 }
 .chat{
     display: flex;
@@ -63,6 +63,11 @@ body{
     align-items: center;
     background-color: aqua  ;
 }
+/* LES DEUX BUTTONS LOGOUT AND LOGIN */
+#login,#logout,#ajouter{
+    border: none;
+    border-radius: 20px;
+}
 .login label{
     font-weight: bolder;
 }
@@ -90,7 +95,7 @@ body{
 .cote{
     width: 27%;
     background-color: rgb(221, 222, 222);
-    box-shadow: 2px 2px 42px 1px rgba(0, 0, 255, .2);
+    /* box-shadow: -22px 2px 52px 1px rgba(38, 38, 42, 0.4); */
 }
 .cote .SearchT{
     display: flex;
@@ -102,11 +107,13 @@ body{
     padding: 3px 0;
     cursor: pointer;
 }
+
 .SearchT .search{
     width: 100%;
     display: flex;
     align-items: center;
     background-color: rgb(244, 244, 244);
+    color: rgb(99, 97, 97);
 }
 
 /* FORMULAIRE DE RECHERCHE  */
@@ -125,7 +132,7 @@ form .rechercherInput:hover{
 .admin{
     width: 60%;
     background-color: rgb(255, 255, 255);
-    box-shadow: 2px 2px 42px 1px rgba(0, 0, 255, .2);
+    /* box-shadow: 22px 2px 52px 1px rgba(38, 38, 42, 0.2); */
 }
 /* LA PARTIE GAUCHE CONTENANT LES USERS */
 .cote .button{
@@ -139,7 +146,12 @@ form .rechercherInput:hover{
 }
 .button input{
     padding: 14px 37px;
-    font-weight: bolder;
+    color: grey;
+    /* font-weight: bolder; */
+}
+h1{
+    color: rgb(70, 68, 68);
+    opacity:1;
 }
 
 .cote .list_users{
@@ -153,7 +165,8 @@ form .rechercherInput:hover{
 .cote .p{
     text-align: center;
     font-size: 40px;
-    font-weight: bold;
+    opacity: .4;
+    /* font-weight: bold; */
     /* text-decoration: underline; */
 }
 
@@ -178,6 +191,17 @@ ul .archive{
     display: flex;
     justify-content: space-around;
 }
+.listOpen{
+    font-size: 40px;
+}
+.listOpen a{
+    text-decoration: none;
+    color: rgb(168, 169, 171);
+}
+#hr{
+    margin: 0px 70px;
+    opacity: .8;
+}
 li .name{
     width: 20%;
 }
@@ -185,6 +209,7 @@ li .modif{
     width: 80%;
     padding: 12px 26px;
     font-size: 20px;
+    
 }
 li a {
     width: 30%;
@@ -203,12 +228,26 @@ li .archive{
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    padding: 6px 0;
+    border-right:1px solid rgba(0, 0, 0, 0.41);
 }
 .profil img{
     width: 100px;
     height: 100px;
     border-radius: 50%;
     margin-top: 18px;
+}
+.profil .user{
+    font-size: 40px;
+    display: flex;
+    padding: 2px 45px;
+}
+#d{
+    padding:0 12px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: aquamarine;
 }
 div .img{
     width: 40%;
@@ -231,6 +270,7 @@ div .titre{
     align-items: center;
     background-color: rgb(0, 0, 0,.85);
     display: none;
+    z-index: 100;
 }
 .add_users form {
     display: flex;
@@ -297,7 +337,46 @@ form #uni{
     border: none;
     padding: 13px 344px;
 }
+.autorisation{
+    display: flex;
+    font-size: 30px;
+    color: red;
+    text-align: center;
+}
+/* TCHAT UTILISATEURS */
+.admin .affiche{
+    background-color: rgb(255, 255, 255);
+    padding: 310px 0;
+    overflow-y: scroll;
+    overflow: hidden;
+}
+.admin .inputMessage{
+    background-color: rgb(221, 222, 222);
+    padding: 30px 0;
+}
+.inputMessage form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 74px;
+}
+.inputMessage form input{
+    padding: 15px 187px;
+    border-radius: 20px;
+    border: none;
+}
+.inputMessage form button{
+    padding: 15px 87px;
+    margin-left: 22px;
+    border-radius: 20px;
+    border: none;
+}
+/* Bulle de Message */
 
+
+
+
+/* ********************* */
 @media only screen and (max-width: 1500px) {
     body{
         display: flex;

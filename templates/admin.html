@@ -117,7 +117,7 @@
                 <input id="ajouter" type="button" value="Ajouter">
                 {% if not current_user.is_authenticated %}
                     <a href="{{ url_for('logout') }}">
-                    <input id="logout" name="logout" type="button"Reloade value="logout"></a>
+                    <input id="logout" name="logout" type="button"Reloade value="Déconnecter"></a>
                 {% else %}
                     <a href="{{ url_for('login') }}">
                     <input id="login" name="login" type="button"Reloade value="login"></a>
@@ -139,7 +139,7 @@
                     <ul id="listNone">
                         
                         {% for i in range(countData) %}
-                            <li><p class="name">{{ data[i]['n'].get('name') }}</p><a href="/update/{{ data[i]['n'].get('id') }}"><button class="modif" type="submit" value="">Modifier</button></a><a href="/delete/{{ data[i]['n'].get('name') }}"><input class="archive" type="button" value="Archiver"></a></li>
+                            <li><p class="name">{{ data[i]['n'].get('prenom') }}</p><a href="/update/{{ data[i]['n'].get('id') }}"><button class="modif" type="submit" value="">Modifier</button></a><a href="/delete/{{ data[i]['n'].get('name') }}"><input class="archive" type="button" value="Archiver"></a></li>
                         {% endfor %}
                     </ul>
                 {% else %}
@@ -148,14 +148,14 @@
             </div>
             <div class="profil">
                 <div class="img"><img src="{{ url_for('static',filename='img/c.png') }}" alt="" srcset=""></div>
-                <div class="titre"><h1>Vous êtes connecté en tant que {{ current_user }}</h1>
+                <div class="titre"><h1>Vous êtes connecté en tant que <br><p class="user">{{ current_user }}</p></h1>
             </div>
             </div>
         </div>
         <div class="admin">
     
         </div>
-    {% else %}
+    {% elif current_user %}
         
         <div class="cote">
             <div class="button">
@@ -163,7 +163,7 @@
                 <input id="ajouter" type="button" value="Ajouter">
                 {% if not current_user.is_authenticated %}
                     <a href="{{ url_for('logout') }}">
-                    <input id="logout" name="logout" type="button"Reloade value="logout"></a>
+                    <input id="logout" name="logout" type="button"Reloade value="Déconnecter"></a>
                 {% else %}
                     <a href="{{ url_for('login') }}">
                     <input id="login" name="login" type="button"Reloade value="login"></a>
@@ -173,19 +173,20 @@
                 <hr>
                 <div class="search">
                     <img id="rechercheImg" src="{{ url_for('static',filename='img/24.png')}}" alt="" srcset="">
-                    <form id="formSearch" action="" method="post">
-                        <input class="rechercherInput" type="text" name="recherche" id="">
+                    <form id="formSearch" action="{{ url_for('trouve_node')}}" method="post">
+                        <input class="rechercherInput" type="text" name="recherche" id="" placeholder="kan gay weur....">
                     </form>Search
                 </div>
                 <hr>
-                <p class="p">Listes Users</p>
+                <p class="p">LISTES USERS</p>
             </div>
             <div class="list_users" data-user-template>
                 {% if not current_user.is_authenticated %}
                     <ul id="listOk">
                         
                         {% for i in range(countData) %}
-                            <li class="listOpen"><a href=""><p class="name">{{ data[i]['n'].get('name') }}</p></a></li>
+                            <li class="listOpen"><a href=""><p class="name">{{ data[i]['n'].get('prenom') }}</p></a></li>
+                            <hr id="hr">
                         {% endfor %}
                     </ul>
                 {% else %}
@@ -193,13 +194,30 @@
                 {% endif %}
             </div>
             <div class="profil">
-                <div class="img"><img src="{{ url_for('static',filename='img/c.png') }}" alt="" srcset=""></div>
-                <div class="titre"><h1>Vous êtes connecté en tant que User <br> {{ current_user }}</h1>
+                {% if 'Masculin' in sexes %}
+                    <div class="img"><img src="{{ url_for('static',filename='img/avatar.jpeg') }}" alt="" srcset=""></div>
+                {% else %}
+                    <div class="img"><img src="{{ url_for('static',filename='img/fem.jpeg') }}" alt="" srcset=""></div>
+                {% endif %}
+                    <div class="titre"><h1>Vous êtes connecté en tant que User <br> <p class="user">{{ current_user }}</p></h1>
             </div>
             </div>
         </div>
         <div class="admin">
+            <div class="affiche">
 
+            </div>
+            <div class="inputMessage">
+                <form action="" method="post">
+                    <input type="text" name="message" placeholder="yonel sa bind">
+                    <button type="submit">Yonél</button>
+
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="autorisation">
+            <h1>Vous êtes pas autorisés à voir cette page</h1>
         </div>
     {% endif %}
    

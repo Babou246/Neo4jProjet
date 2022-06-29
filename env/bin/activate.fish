@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/abubakr/Bureau/LES_TP_SONATEL_ACADEMY/ProjetNosql/redis-flask-docker/env"
+set -gx VIRTUAL_ENV "/home/abubakr/Bureau/LES_TP_SONATEL_ACADEMY/ProjetNosql/redisNeo4j/Neo4jProjet/env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
