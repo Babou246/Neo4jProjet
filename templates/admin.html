@@ -1,0 +1,206 @@
+{% extends 'defaults.html' %}
+{% block body %}
+    <!-- Notre popup -->
+    <div class="add_user">
+        <form action="{{ url_for('creer_un_noeud') }}" method="post">
+            <span id="fermer">FERMER</span>
+            <input id="id" type="number" name="id" required>
+            <div id="uni">
+                <div class="input">
+                    <label for="">Nom</label><br>
+                    <input type="text" name="name" id="name">
+                </div>
+                <div class="input">
+                    <label for="">Prenom</label><br>
+                    <input type="text" name="prenom" id="prenom">
+                </div>
+            </div>
+            <div id="uni">
+
+                <div class="input">
+                    <label for="">Telephone</label><br>
+                    <input type="phone" name="telephone" id="telephone">
+                </div>
+                <div class="input">
+                    <label for="">Email</label><br>
+                    <input type="text" name="email" id="email">
+                </div>
+            </div>
+
+            <div class="input">
+                <label for="">Adresse</label><br>
+                <input class="adresse" type="text" name="adresse" id="adresse">
+            </div>
+
+            <div class="input">
+                <label for="profession">Profession</label><br>
+                <input class="adresse" type="text" name="profession" id="profession">
+            </div>
+            
+            <div id="uni">
+                <div class="input">
+                    <label for="">Age</label><br>
+                    <input type="number" name="age" id="age">
+                </div>
+                <div class="input">
+                    <label for="">Sexe</label><br>
+                    <input type="text" name="sexe" id="sexe">
+                </div>
+            </div>
+            <div id="uni">
+                <!-- <input type="button" value="Ajouter"> -->
+                <button type="submit">Ajouter</button>
+            </div>
+        </form>
+    </div>
+
+    {% for i in range(countFriends) %}
+        
+        <div class="add_users">
+            <form action="{{ url_for('creer_un_noeud') }}" method="post">
+                <span id="fermer">FERMER</span>
+                <div id="uni">
+                    <div class="input">
+                        <label for="">Nom</label><br>
+                        <input type="text" name="name" id="name" value="{{ dico[i].get('name') }}">
+                    </div>
+                    <div class="input">
+                        <label for="">Prenom</label><br>
+                        <input type="text" name="prenom" id="prenom" value="{{ dico[i].get('prenom')}}">
+                    </div>
+                </div>
+                <div id="uni">
+
+                    <div class="input">
+                        <label for="">Telephone</label><br>
+                        <input type="phone" name="telephone" id="telephone" value="{{ dico[i].get('telephone')}}">
+                    </div>
+                    <div class="input">
+                        <label for="">Email</label><br>
+                        <input type="text" name="email" id="email" value="{{ dico[i].get('email')}}">
+                    </div>
+                </div>
+
+                <div class="input">
+                    <label for="">Adresse</label><br>
+                    <input class="adresse" type="text" name="adresse" id="adresse" value="{{ dico[i].get('adresse')}}">
+                </div>
+
+                <div class="input">
+                    <label for="profession">Profession</label><br>
+                    <input class="adresse" type="text" name="profession" id="profession" value="{{ dico[i].get('profession')}}">
+                </div>
+                
+                <div id="uni">
+                    <div class="input">
+                        <label for="">Age</label><br>
+                        <input type="number" name="age" id="age" value="{{ dico[i].get('age')}}">
+                    </div>
+                    <div class="input">
+                        <label for="">Sexe</label><br>
+                        <input type="text" name="sexe" id="sexe" value="{{ dico[i].get('sexe')}}">
+                    </div>
+                </div>
+                <div id="uni">
+                    <button type="submit">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    {% endfor %}
+
+    
+    <!--  -->
+    {% if current_user=='admin' %}
+        <div class="cote">
+            <div class="button">
+                
+                <input id="ajouter" type="button" value="Ajouter">
+                {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}">
+                    <input id="logout" name="logout" type="button"Reloade value="logout"></a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">
+                    <input id="login" name="login" type="button"Reloade value="login"></a>
+                {% endif %}
+            </div>
+            <div class="SearchT">
+                <hr>
+                <div class="search">
+                    <img id="rechercheImg" src="{{ url_for('static',filename='img/24.png')}}" alt="" srcset="">
+                    <form id="formSearch" action="" method="post">
+                        <input class="rechercherInput" type="text" name="recherche" id="">
+                    </form>Search
+                </div>
+                <hr>
+                <p class="p">Listes Users</p>
+            </div>
+            <div class="list_users" data-user-template>
+                {% if not current_user.is_authenticated %}
+                    <ul id="listNone">
+                        
+                        {% for i in range(countData) %}
+                            <li><p class="name">{{ data[i]['n'].get('name') }}</p><a href="/update/{{ data[i]['n'].get('id') }}"><button class="modif" type="submit" value="">Modifier</button></a><a href="/delete/{{ data[i]['n'].get('name') }}"><input class="archive" type="button" value="Archiver"></a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <h1>Il faut connecter pour voir les Users</h1>
+                {% endif %}
+            </div>
+            <div class="profil">
+                <div class="img"><img src="{{ url_for('static',filename='img/c.png') }}" alt="" srcset=""></div>
+                <div class="titre"><h1>Vous êtes connecté en tant que {{ current_user }}</h1>
+            </div>
+            </div>
+        </div>
+        <div class="admin">
+    
+        </div>
+    {% else %}
+        
+        <div class="cote">
+            <div class="button">
+                
+                <input id="ajouter" type="button" value="Ajouter">
+                {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}">
+                    <input id="logout" name="logout" type="button"Reloade value="logout"></a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">
+                    <input id="login" name="login" type="button"Reloade value="login"></a>
+                {% endif %}
+            </div>
+            <div class="SearchT">
+                <hr>
+                <div class="search">
+                    <img id="rechercheImg" src="{{ url_for('static',filename='img/24.png')}}" alt="" srcset="">
+                    <form id="formSearch" action="" method="post">
+                        <input class="rechercherInput" type="text" name="recherche" id="">
+                    </form>Search
+                </div>
+                <hr>
+                <p class="p">Listes Users</p>
+            </div>
+            <div class="list_users" data-user-template>
+                {% if not current_user.is_authenticated %}
+                    <ul id="listOk">
+                        
+                        {% for i in range(countData) %}
+                            <li class="listOpen"><a href=""><p class="name">{{ data[i]['n'].get('name') }}</p></a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <h1>Il faut connecter pour voir les Users</h1>
+                {% endif %}
+            </div>
+            <div class="profil">
+                <div class="img"><img src="{{ url_for('static',filename='img/c.png') }}" alt="" srcset=""></div>
+                <div class="titre"><h1>Vous êtes connecté en tant que User <br> {{ current_user }}</h1>
+            </div>
+            </div>
+        </div>
+        <div class="admin">
+
+        </div>
+    {% endif %}
+   
+{% endblock %}

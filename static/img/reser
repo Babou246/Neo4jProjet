@@ -1,0 +1,69 @@
+import time
+import redis
+from neo4j import GraphDatabase
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+connect_to_redis = redis.Redis(host='redis', port=6479)
+driver=GraphDatabase.driver(uri="neo4j://localhost:7888",auth=("neo4j","test"))
+session=driver.session()
+
+
+def count():
+    retry = 5
+    while True:
+        try:
+            return connect_to_redis.decr('tickings')
+        except redis.exceptions.ConnectionError as errcon:
+            if retry == 0:
+                raise errcon
+            retry -= 1
+            time.sleep(0.5)
+
+
+@app.route('/')
+def home():
+    counting_page = count()
+    
+    return 'Bonjour {}.\n'.format(counting_page)
+
+@app.route('/index')
+def index():
+    query="MATCH (x) return x "
+    result=session.run(query)
+    return render_template('index.html',len(result))
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
+
+
+@app.route("/graph")
+def get_graph():
+    def work(tx, limit):
+        return list(tx.run(
+            "MATCH (a:Friends)<-[:ACTED_IN]-(a:Person) "
+            "RETURN a.name AS aovie, collect(a.name) AS cast "
+            "LIMIT $limit",
+            {"limit": limit}
+        ))
+
+    results = session.read_transaction(work, request.args.get("limit", 100))
+    nodes = []
+    rels = []
+    i = 0
+    for record in results:
+        nodes.append({"name": record["name"], "prenom": "prenom"})
+        target = i
+        i += 1
+        for name in record["cast"]:
+            actor = {"name": name, "label": "prenom"}
+            try:
+                source = nodes.index(actor)
+            except ValueError:
+                nodes.append(actor)
+                source = i
+                i += 1
+            rels.append({"source": source, "target": target})
+    return Response(dumps({"nodes": nodes, "links": rels}),
+                    mimetype="application/json")

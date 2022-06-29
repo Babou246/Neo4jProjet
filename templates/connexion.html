@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css') }}">
+
+        <title>Login</title>
+    </head>
+    <body>
+        {% if not current_user.is_authenticated %}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}<a href="{{ url_for('login') }}"></a>.
+                </div>
+            {% endif %}
+        {% endwith %}
+        <section class="">
+            <form action="{{ url_for('login') }}" method="post">
+                <div class="" id="">
+                    <div class="modal__content">
+                        
+                        <div class="">
+                            <label for="">Username</label><br>
+                            <input type="text" name="name" id="name" placeholder="Name">
+                        </div>
+                        <div class="">
+                            <label for="">Email</label><br>
+                            <input type="text" name="email" id="email" placeholder="Email">
+                        </div>
+                        <button type="submit" class="">
+                            Connecter
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </section>
+        {% else %}
+            <h1>Vous etes déja connectés</h1>
+        {% endif %}
+    </body>
+</html>

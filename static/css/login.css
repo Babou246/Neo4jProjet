@@ -1,0 +1,55 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+    background-color: rgb(212, 214, 215);
+}
+*{
+    text-decoration: none;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 90px;
+    padding: 2px 20px;
+    width: 480px;
+    height: 45vh;
+    background-color: rgb(224, 224, 224);
+    box-shadow: 12px 2px 34px grey;
+    font-size: 35px
+
+}
+form input{
+    padding: 18px 80px;
+    border: none;
+    border-radius: 20px;
+}
+form label{
+    font-size: 25px;
+    font-weight: bold;
+}
+form button{
+    padding: 18px 50px;
+    border-radius: 20px ;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+
+}
+form div{
+    padding: 23px 0;
+}
+.notification{
+    color: rgb(190, 12, 2);
+    width: 390px;
+    border-radius: 20px;
+}

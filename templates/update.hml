@@ -1,0 +1,64 @@
+
+
+<div class="add_user">
+        <form action="{{ url_for('creer_un_noeud') }}" method="post">
+            <span id="fermer">FERMER</span>
+            <div id="uni">
+                <div class="input">
+                    <label for="">Nom</label><br>
+                    <input type="text" name="name" id="name">
+                </div>
+                <div class="input">
+                    <label for="">Prenom</label><br>
+                    <input type="text" name="prenom" id="prenom">
+                </div>
+            </div>
+            <div id="uni">
+
+                <div class="input">
+                    <label for="">Telephone</label><br>
+                    <input type="phone" name="telephone" id="telephone">
+                </div>
+                <div class="input">
+                    <label for="">Email</label><br>
+                    <input type="text" name="email" id="email">
+                </div>
+            </div>
+
+            <div class="input">
+                <label for="">Adresse</label><br>
+                <input class="adresse" type="text" name="adresse" id="adresse">
+            </div>
+
+            <div class="input">
+                <label for="profession">Profession</label><br>
+                <input class="adresse" type="text" name="profession" id="profession">
+            </div>
+            
+            <div id="uni">
+                <div class="input">
+                    <label for="">Age</label><br>
+                    <input type="number" name="age" id="age">
+                </div>
+                <div class="input">
+                    <label for="">Sexe</label><br>
+                    <input type="text" name="sexe" id="sexe">
+                </div>
+            </div>
+            <div id="uni">
+                <!-- <input type="button" value="Ajouter"> -->
+                <button type="submit">Ajouter</button>
+            </div>
+        </form>
+    </div>
+
+    # def count():
+#     retry = 5
+#     while True:
+#         try:
+#             return connect_to_redis.decr('tickings')
+#         except redis.exceptions.ConnectionError as errcon:
+#             if retry == 0:
+#                 raise errcon
+#             retry -= 1
+#             time.sleep(0.5)

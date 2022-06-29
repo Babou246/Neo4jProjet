@@ -1,0 +1,322 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 59px;
+    background-color: rgb(226, 226, 220);
+}
+.chat{
+    display: flex;
+    border: 3px solid;
+    background-color: rgb(8, 104, 98);
+    height: 69vh;
+    width: 80%;
+}
+#id{
+    width: 50px;
+}
+.right{
+    flex: 1;
+    border: 2px solid;
+    height: 69vh;
+
+}
+.left{
+    flex: 4;
+    height: 69vh;
+    border: 2px solid;
+}
+.left .visuel{
+    /* background-color: aqua; */
+    padding: 286px 0;
+    border: 1px solid;
+}
+.left .input{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* background-color: blue; */
+    border: 1px solid;
+    background-color: antiquewhite;
+    padding: 26px 0;
+}
+.input input{
+    padding: 10px 130px;
+}
+.input button{
+    padding: 10px 10px;
+    font-weight: bolder;
+    background-color: rgb(255, 255, 255);
+}
+
+/* LOGIN */
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua  ;
+}
+.login label{
+    font-weight: bolder;
+}
+.login .label{
+    padding: 22px 23px;
+}
+.label input{
+    padding: 14px 25px;
+    border-radius: 12px;
+    border: none;
+}
+.login button{
+    padding: 10px 110px;
+    border: none;
+}
+.login button:hover{
+    border: none;
+}
+
+/* FIN DE LA PARTIE DE CONNEXION */
+/* ADMIN */
+.cote,.admin{
+    height: 82vh;
+}
+.cote{
+    width: 27%;
+    background-color: rgb(221, 222, 222);
+    box-shadow: 2px 2px 42px 1px rgba(0, 0, 255, .2);
+}
+.cote .SearchT{
+    display: flex;
+    flex-direction: column;
+    font-size: 39px;
+}
+.SearchT #rechercheImg{
+    width: 8%;
+    padding: 3px 0;
+    cursor: pointer;
+}
+.SearchT .search{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgb(244, 244, 244);
+}
+
+/* FORMULAIRE DE RECHERCHE  */
+form .rechercherInput{
+    padding: 7px 40px;
+    transform: scaleX(20px);
+    border: 0.3px solid #000;
+    display: none;
+    border-radius: 20px;
+}
+form .rechercherInput:hover{
+    box-shadow: 2px 2px 42px 1px rgba(0, 0, 255, .2);
+}
+
+/* LA PARTIE AFFICHE INFO USERS */
+.admin{
+    width: 60%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 2px 42px 1px rgba(0, 0, 255, .2);
+}
+/* LA PARTIE GAUCHE CONTENANT LES USERS */
+.cote .button{
+    /* border: 2px solid; */
+    height: 9vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around   ;
+    align-items: center;
+    padding: 0 23px;
+}
+.button input{
+    padding: 14px 37px;
+    font-weight: bolder;
+}
+
+.cote .list_users{
+    /* border: 2px solid; */
+    text-align: center;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 48vh;
+    background-color: #FFF;
+}
+.cote .p{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    /* text-decoration: underline; */
+}
+
+.list_users #listNone{
+    list-style: none;
+    margin-top: 12px;
+}
+ul .modif{
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 166, 255);
+    padding: 0px 15px;
+    /* background-color: rgb(0, 166, 255); */
+}
+ul .archive{
+    color: rgb(0, 0, 0);
+    padding: 0px 15px;
+    border: 1px solid red;
+    /* background-color: rgb(255, 0, 30); */
+}
+.list_users li{
+    padding: 5px 4px;
+    display: flex;
+    justify-content: space-around;
+}
+li .name{
+    width: 20%;
+}
+li .modif{
+    width: 80%;
+    padding: 12px 26px;
+    font-size: 20px;
+}
+li a {
+    width: 30%;
+}
+li .archive{
+    font-size: 20px;
+    padding: 12px 26px;
+}
+#listOk{
+    list-style-type: style;;
+}
+/* Profil Admin */
+.profil{
+    /* border: 2px solid; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+.profil img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 18px;
+}
+div .img{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div .titre{
+    width: 70%;
+    font-size: 10px;
+}
+.add_user,.add_users{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0,.85);
+    display: none;
+}
+.add_users form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(226, 226, 220);
+    /* border: 2px solid; */
+    width: 800px;
+    height: 65vh;
+}
+.add_user form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(226, 226, 220);
+    /* border: 2px solid; */
+    width: 800px;
+    height: 65vh;
+}
+form span{
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    font-weight: bold;
+    top: -76px;
+    left: 348px;
+    cursor: pointer;
+}
+form #uni{
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    /* border: 2px solid; */
+}
+
+#uni .input{
+    padding: 0px 12px;
+}
+#uni .a{
+    display: flex;
+    justify-content: space-around;
+    align-items:center ;
+}
+#uni .r input{
+    width: 620px;
+    background-color: aqua;
+}
+#uni label{
+    font-family: 'Courier New', Courier, monospace;
+
+}
+.input input{
+    width: 370px;
+    border-radius: 17px;
+    border: none;
+}
+.input .adresse{
+    width: 760px;
+}
+#uni button{
+    border-radius: 17px;
+    border: none;
+    padding: 13px 344px;
+}
+
+@media only screen and (max-width: 1500px) {
+    body{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 59px;
+        background-color: rgb(226, 226, 220);
+    }
+    .cote{
+        width: 900px;
+        height: 75vh;
+    }
+    .list_users{
+        height: 10vh;
+    }
+    .admin{
+        width: 900px;
+        height: 70vh;
+        display: none;
+    }
+}

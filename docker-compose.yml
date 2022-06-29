@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+  web:
+    build: .
+        # context: .
+        # args:
+        #     USER_ID: ${USER_ID}
+        #     GROUP_ID: ${GROUP_ID}
+    ports:
+     - "5000:5055"
+    volumes:
+     - .:/data
+    depends_on:
+     - redis
+     - neo4j
+  redis:
+    image: "redis:alpine"
+    ports:
+     - "6479:6379"
+  neo4j:
+    image: neo4j:4.0.4-community
+    ports:
+     - "7575:7474"
+     - "7888:7687"
+    volumes:
+     - $HOME/neo4j/data:/data
+     - $HOME/neo4j/logs:/logs
+     - $HOME/neo4j/import:/var/lib/neo4j/import
+     - $HOME/neo4j/plugins:/plugins
+    environment:
+     - NEO4J_AUTH=neo4j/test
+volumes:
+  db: {}

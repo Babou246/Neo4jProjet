@@ -1,0 +1,4 @@
+flask
+redis
+neo4j
+flask_login
