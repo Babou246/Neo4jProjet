@@ -53,3 +53,12 @@ form div{
     width: 390px;
     border-radius: 20px;
 }
+
+@media only screen and (max-width: 768){
+    form{
+        width: 280px
+    }
+    form input{
+
+    }
+}

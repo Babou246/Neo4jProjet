@@ -18,7 +18,7 @@ Execute in Terminal
 
 ```
 git clone https://github.com/bBabou246/Neo4jProjet.git
-cd neo4j-flask-app/   
+cd Neo4jProjet/   
 pip3 install virtualenv   
 virtualenv -p python3 env   
 source <path>/env/bin/activate
@@ -39,4 +39,4 @@ Once you go to the above url, follow the below steps:
 Execute ```python3 app.py```  là ou se trouve app.py
 
 **Allez sur l'url ![port=5000] 
-[http://0.0.0.0:5000/](http://0.0.0.0:5000/)**
+[http://0.0.0.0:5000/](http://0.0.0.0:5002/)**
